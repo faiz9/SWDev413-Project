@@ -7,7 +7,7 @@ import Signup from './pages/Signup';
 import UserPage from './pages/UserPage';
 
 const App = () => {
-  // todo, add more pages!
+  // todo, add more pages
   return (
     <div>
       <nav>
