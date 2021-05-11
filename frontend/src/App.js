@@ -6,7 +6,7 @@ import ViewListingComponent from "./components/viewListing/viewListingComponent"
 import Header from "./components/Header/Header";
 
 const App = () => {
-main
+//main
   return (
     <div>
       <Header />
