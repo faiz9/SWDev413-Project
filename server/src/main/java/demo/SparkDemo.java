@@ -35,7 +35,7 @@ public class SparkDemo {
               .append("description", "I DO KNOW");
       listCollection.insertOne(doc);
       Document doc1 = new Document("email", "idk@mail.com")
-              .append("descriiption", "I hope I appear");
+              .append("description", "I hope I appear");
       listCollection.insertOne(doc1);
 
       get("/view-Listings", (req, res) -> {
