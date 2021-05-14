@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+
+
 class postListingComponent extends Component {
   constructor(props) {
     super(props);
@@ -117,7 +119,7 @@ class postListingComponent extends Component {
                   </div>
                   <div className="col mt-3">
                     <button className="btn btn-success btn-sm">Submit</button>
-                    <button className="btn btn-danger btn-sm m-1">reset</button>
+                    <button className="btn btn-danger btn-sm m-1" type="reset">reset</button>
                   </div>
                 </div>
               </div>
