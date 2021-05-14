@@ -9,13 +9,13 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.sun.tools.javac.util.List;
+//import com.sun.tools.javac.util.List;
 import java.util.ArrayList;
 import org.bson.Document;
 
 public class SparkDemo {
 
-  List<ListingDto> listing;                     // Use this list to retrieve from the database and put it in here
+  ArrayList<ListingDto> listing;                     // Use this list to retrieve from the database and put it in here
                                                 // Actually I'm wondering if we need it
                                                 // I'll keep it here and if we dont need it we can get rid of it later
   static Gson gson = new Gson();
