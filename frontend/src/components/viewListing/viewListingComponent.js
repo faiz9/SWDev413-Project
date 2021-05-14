@@ -49,7 +49,7 @@ class viewListingComponent extends Component {
           <div className="row justify-content-md-center">
             <div className="col-6">
               <h1>
-                Post Listing Page
+                View Listing Page
                 <button type="button" class="btn btn-primary m-3">
                   Count <span class="badge badge-light">{this.state.itemList.length}</span>
                 </button>
