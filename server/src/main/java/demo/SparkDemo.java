@@ -9,13 +9,13 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.sun.tools.javac.util.List;
+//import com.sun.tools.javac.util.List;
 import java.util.ArrayList;
 import org.bson.Document;
 
 public class SparkDemo {
 
-  List<ListingDto> listing;                     // Use this list to retrieve from the database and put it in here
+  ArrayList<ListingDto> listing;                     // Use this list to retrieve from the database and put it in here
                                                 // Actually I'm wondering if we need it
                                                 // I'll keep it here and if we dont need it we can get rid of it later
   static Gson gson = new Gson();
@@ -30,7 +30,13 @@ public class SparkDemo {
       port(1235);                                                     // Same port as that in classwork 10
       webSocket("/ws", WebSocketHandler.class);
 
-
+      // Testing mongo database
+      Document doc = new Document("email", "gabe@mail.com")
+              .append("description", "I DO KNOW");
+      listCollection.insertOne(doc);
+      Document doc1 = new Document("email", "idk@mail.com")
+              .append("descriiption", "I hope I appear");
+      listCollection.insertOne(doc1);
 
       get("/view-Listings", (req, res) -> {
         ArrayList<Document> docs = listCollection.find().into(new ArrayList<Document>());
