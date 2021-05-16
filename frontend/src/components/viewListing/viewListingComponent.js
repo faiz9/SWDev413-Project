@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 
 class viewListingComponent extends Component {
   constructor(props) {
@@ -8,35 +9,30 @@ class viewListingComponent extends Component {
       itemList: [
         {
           description: "Apple 7+ with full set charger handfree included.",
-          type: "Mobile phone",
-          quantity: "1",
-          price: "$450",
           email: "ABC@Gmail.com",
         },
         {
           description: "Apple Laptop 6GB ram 500GB hard disk.",
-          type: "Laptop",
-          quantity: "2",
-          price: "$1000",
           email: "ABC@Gmail.com",
         },
         {
           description: "Protable 5G wifi router. brand new.",
-          type: "Accessories",
-          quantity: "10",
-          price: "$250",
           email: "ABC@Gmail.com",
         },
         {
           description: "Samsung S8",
-          type: "Mobile phone",
-          quantity: "1",
-          price: "$450",
           email: "ABC@Gmail.com",
         },
       ],
     };
   }
+
+  //added this block from hw 3 
+  getItemList(){
+    axios.get('/view-Listings').then((response) => {
+      this.setState({ itemList: response.data.items });
+    });
+  }; 
 
   redirectToPostPage = () => {
     this.props.history.push("/post-listing");
@@ -65,13 +61,13 @@ class viewListingComponent extends Component {
               >
                 <div className="col-8">
                   <div className="card mt-2">
-                    <div className="card-header">{item.type}</div>
+                    {/* <div className="card-header">{item.type}</div> */}
                     <div className="card-body">
                       <h5 className="card-title">{item.description}</h5>
                       <p className="card-text">
-                        <p>
+                        {/* <p>
                           Price : {item.price} , Quantity : {item.quantity}
-                        </p>
+                        </p> */}
                         <p>Reply for inquire : {item.email}</p>
                       </p>
                       <button className="btn btn-danger">Delete</button>
