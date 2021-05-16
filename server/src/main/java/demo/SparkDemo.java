@@ -30,13 +30,21 @@ public class SparkDemo {
       port(1235);                                                     // Same port as that in classwork 10
       webSocket("/ws", WebSocketHandler.class);
 
-
+      // Testing mongo database
+      Document doc = new Document("email", "gabe@mail.com")
+              .append("description", "I DO KNOW");
+      listCollection.insertOne(doc);
+      Document doc1 = new Document("email", "idk@mail.com")
+              .append("description", "I hope I appear");
+      listCollection.insertOne(doc1);
 
       get("/view-Listings", (req, res) -> {
         ArrayList<Document> docs = listCollection.find().into(new ArrayList<Document>());
           // I'm assuming that I dont need to convert using Gson because it is already in Json i think
           return gson.toJson(docs);                                      //Maybe I have to urn this into json
-      });
+      });     
+      
+          //Plural one is for the whole database. Displays all everything from the database.
 
       get("/view-Listing", (req, res) -> {             // I made a separate function but maybe I can just update the function above
         String request = req.body();                        // so that it gets("/view-Listings/email") and there will be an if statement.
@@ -45,13 +53,22 @@ public class SparkDemo {
         System.out.println("Email: " + email);
         ArrayList<Document> docs = (ArrayList<Document>) listCollection.find(eq("email", email));
         return gson.toJson(docs);
+      });      // checks the email you're passing in. Front end to past in request body parameter email. Pass back json (of evreything) that has same email aka filtered lists.
+
+      post("/post-listing", (req, res) -> {
+        String email = req.params("email");
+        String desc = req.params("description");
+        Document doc2 = new Document("email", email)
+                .append("description", desc);
+        listCollection.insertOne(doc2);
+        return null;
       });
 
       delete("/delete-Listing", (req, res) -> {
         String request = req.body();
+        String  des = req.params("description");
 
-        String id = req.params("id");
-        listCollection.deleteOne(eq("id", id));
+        listCollection.deleteOne(eq("description", des));
         return 0;                                         // I'm returning 0 now but if the front end needs anything returned it can be changed
       });
 
