@@ -1,23 +1,31 @@
-import React from 'react';
-import './App.css';
-import { Switch, Route, Link } from 'react-router-dom';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import UserPage from './pages/UserPage';
+import React from "react";
+import "./App.css";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
+import postListingComponent from "./components/postListing/postListingComponent";
+import ViewListingComponent from "./components/viewListing/viewListingComponent";
+import Header from "./components/Header/Header";
 
 const App = () => {
-  // todo, add more pages
+//main
   return (
     <div>
-      <nav>
-        <Link to="/"> Home </Link>
-      </nav>
-      <Switch>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
+      <Header />
+      <div>
+        <BrowserRouter>
+          <Switch>
+            <Route
+              exact
+              path="/post-listing"
+              component={postListingComponent}
+            ></Route>
+            <Route
+              exact
+              path="/view-listing"
+              component={ViewListingComponent}
+            ></Route>
+          </Switch>
+        </BrowserRouter>
+      </div>
     </div>
   );
 };
