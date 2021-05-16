@@ -55,9 +55,9 @@ public class SparkDemo {
 
       delete("/delete-Listing", (req, res) -> {
         String request = req.body();
+        String  des = req.params("description");
 
-        String id = req.params("id");
-        listCollection.deleteOne(eq("id", id));
+        listCollection.deleteOne(eq("description", des));
         return 0;                                         // I'm returning 0 now but if the front end needs anything returned it can be changed
       });
 
