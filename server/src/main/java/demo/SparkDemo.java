@@ -41,6 +41,11 @@ public class SparkDemo {
       get("/view-Listings", (req, res) -> {
         ArrayList<Document> docs = listCollection.find().into(new ArrayList<Document>());
           // I'm assuming that I dont need to convert using Gson because it is already in Json i think
+        System.out.println("REquest: " + req);
+        for(int n= 0; n < docs.size(); n++)
+        {
+          System.out.println(docs.get(n));
+        }
           return gson.toJson(docs);                                      //Maybe I have to urn this into json
       });     
       
@@ -56,20 +61,22 @@ public class SparkDemo {
       });      // checks the email you're passing in. Front end to past in request body parameter email. Pass back json (of evreything) that has same email aka filtered lists.
 
 
+      post("/post-listing", (req, res) -> {
+        String email = req.params("email");
+        String desc = req.params("description");
+        Document doc2 = new Document("email", email)
+                .append("description", desc);
+        listCollection.insertOne(doc2);
+        return null;
+      });
 
       delete("/delete-Listing", (req, res) -> {
         String request = req.body();
+        String  des = req.params("description");
 
-        String id = req.params("id");
-        listCollection.deleteOne(eq("id", id));
+        listCollection.deleteOne(eq("description", des));
         return 0;                                         // I'm returning 0 now but if the front end needs anything returned it can be changed
       });
-
-
-
-
-
-
 
   }
 }

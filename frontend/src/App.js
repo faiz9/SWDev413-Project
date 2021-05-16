@@ -1,34 +1,22 @@
 import React from "react";
 import "./App.css";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
-import postListingComponent from "./components/postListing/postListingComponent";
-import ViewListingComponent from "./components/viewListing/viewListingComponent";
-import Header from "./components/Header/Header";
-
+import { Switch, Route} from "react-router-dom";
+import Home from './pages/Home';
 
 const App = () => {
 //main
+  // todo, add more pages!
+
   return (
     <div>
-      <Header />
-      <div>
-        <BrowserRouter>
-          <Switch>
-            <Route
-              exact
-              path="/post-listing"
-              component={postListingComponent}
-            ></Route>
-            <Route
-              exact
-              path="/view-listing"
-              component={ViewListingComponent}
-            ></Route>
-          </Switch>
-        </BrowserRouter>
-      </div>
+      <Switch>
+        <Route path="/">
+          <Home ws={ws} />
+        </Route>
+      </Switch>
     </div>
   );
 };
+
 
 export default App;
