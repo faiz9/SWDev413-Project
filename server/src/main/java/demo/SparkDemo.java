@@ -10,6 +10,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 //import com.sun.tools.javac.util.List;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import org.bson.Document;
 
@@ -31,17 +32,12 @@ public class SparkDemo {
       webSocket("/ws", WebSocketHandler.class);
 
       // Testing mongo database
-      Document doc = new Document("email", "gabe@mail.com")
-              .append("description", "I DO KNOW");
-      listCollection.insertOne(doc);
-      Document doc1 = new Document("email", "idk@mail.com")
-              .append("description", "I hope I appear");
-      listCollection.insertOne(doc1);
+
 
       get("/view-Listings", (req, res) -> {
         ArrayList<Document> docs = listCollection.find().into(new ArrayList<Document>());
           // I'm assuming that I dont need to convert using Gson because it is already in Json i think
-        System.out.println("REquest: " + req);
+
         for(int n= 0; n < docs.size(); n++)
         {
           System.out.println(docs.get(n));
@@ -72,8 +68,9 @@ public class SparkDemo {
 
       delete("/delete-Listing", (req, res) -> {
         String request = req.body();
-        String  des = req.params("description");
+        String  des = req.queryMap("description").value();
         System.out.println("req: " + req);
+        System.out.println("Body: " + request);
         System.out.println("description: " + des);
         listCollection.deleteOne(eq("description", des));
         return 0;                                         // I'm returning 0 now but if the front end needs anything returned it can be changed
