@@ -53,7 +53,15 @@ public class SparkDemo {
         System.out.println("Email: " + email);
         ArrayList<Document> docs = (ArrayList<Document>) listCollection.find(eq("email", email));
         return gson.toJson(docs);
-      });      // checks the email you're passing in. Front end to past in request body parameter email. Pass back json (of evreything) that has same email aka filtered lists.  
+      });      // checks the email you're passing in. Front end to past in request body parameter email. Pass back json (of evreything) that has same email aka filtered lists.
+
+      post("/post-listing", (req, res) -> {
+        String email = req.params("email");
+        String desc = req.params("description");
+        ArrayList<Document> docs = (ArrayList<Document>) listCollection.find(eq("email", email));
+        ArrayList<Document> docs1 = (ArrayList<Document>) listCollection.find(eq("description", desc));
+        return gson.toJson(docs) + gson.toJson(docs1);
+      });
 
       delete("/delete-Listing", (req, res) -> {
         String request = req.body();
