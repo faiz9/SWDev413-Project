@@ -41,6 +41,11 @@ public class SparkDemo {
       get("/view-Listings", (req, res) -> {
         ArrayList<Document> docs = listCollection.find().into(new ArrayList<Document>());
           // I'm assuming that I dont need to convert using Gson because it is already in Json i think
+        System.out.println("REquest: " + req);
+        for(int n= 0; n < docs.size(); n++)
+        {
+          System.out.println(docs.get(n));
+        }
           return gson.toJson(docs);                                      //Maybe I have to urn this into json
       });     
       
