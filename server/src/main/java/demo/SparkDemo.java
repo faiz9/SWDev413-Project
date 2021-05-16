@@ -58,9 +58,10 @@ public class SparkDemo {
       post("/post-listing", (req, res) -> {
         String email = req.params("email");
         String desc = req.params("description");
-        ArrayList<Document> docs = (ArrayList<Document>) listCollection.find(eq("email", email));
-        ArrayList<Document> docs1 = (ArrayList<Document>) listCollection.find(eq("description", desc));
-        return gson.toJson(docs) + gson.toJson(docs1);
+        Document doc2 = new Document("email", email)
+                .append("description", desc);
+        listCollection.insertOne(doc2);
+        return null;
       });
 
       delete("/delete-Listing", (req, res) -> {
