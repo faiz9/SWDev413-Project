@@ -15,12 +15,20 @@ const [list, setMessageList] = React.useState([]);
     fetchListing();
   }, []);
 
+  const handleDelete = (e) =>{
+    console.log("E: " + e);
+    const body = list[e];
+
+    axios.delete('/delete-Listing', body)
+      .then(fetchListing());
+  };
 
   return (
     <div>
             {list.map((object, i) => <div key={i}>
           <div>{object.email}</div>
           <div>{object.description}</div>
+          <button onClick={handleDelete({i})} id='delete'>Delete</button>
         </div>)}
     </div>
   );
