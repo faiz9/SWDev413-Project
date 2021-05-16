@@ -7,7 +7,6 @@ const [list, setMessageList] = React.useState([]);
   const fetchListing = () => {
     axios.get('view-Listings')
       .then((res) => {
-        console.log(`items: ` + res.data);
         setMessageList(res.data);
       })
   }
@@ -18,7 +17,7 @@ const [list, setMessageList] = React.useState([]);
   const handleDelete = (e) =>{
     console.log("E: " + e);
     const body = list[e];
-
+    console.log(body);
     axios.delete('/delete-Listing', body)
       .then(fetchListing());
   };
