@@ -60,6 +60,7 @@ public class SparkDemo {
         return gson.toJson(docs);
       });      // checks the email you're passing in. Front end to past in request body parameter email. Pass back json (of evreything) that has same email aka filtered lists.
 
+
       post("/post-listing", (req, res) -> {
         String email = req.params("email");
         String desc = req.params("description");
@@ -77,12 +78,6 @@ public class SparkDemo {
         listCollection.deleteOne(eq("description", des));
         return 0;                                         // I'm returning 0 now but if the front end needs anything returned it can be changed
       });
-
-
-
-
-
-
 
   }
 }
