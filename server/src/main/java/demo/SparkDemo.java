@@ -52,7 +52,13 @@ public class SparkDemo {
         ListingDto body = gson.fromJson(request, ListingDto.class);
         String email = body.email;
         System.out.println("Email: " + email);
-        ArrayList<Document> docs = (ArrayList<Document>) listCollection.find(eq("email", email));
+        ArrayList<Document> docs;
+        if(email.equals("")){
+          docs = listCollection.find().into(new ArrayList<Document>());
+        }
+        else{
+          docs = (ArrayList<Document>) listCollection.find(eq("email", email));
+        }
         return gson.toJson(docs);
       });      // checks the email you're passing in. Front end to past in request body parameter email. Pass back json (of evreything) that has same email aka filtered lists.
 

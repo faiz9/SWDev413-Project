@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const Home = ({ ws }) => {
+const Home = () => {
 
   const [list, setMessageList] = React.useState([]);
 
@@ -13,7 +13,7 @@ const Home = ({ ws }) => {
 
 
   const fetchListing = () => {
-    axios.get('view-Listings')
+    axios.get('/view-Listings')
       .then((res) => {
         setMessageList(res.data);
       });
@@ -25,10 +25,7 @@ const Home = ({ ws }) => {
 
 
   function handleDelete(e, q){
-    
     const r = e;
-    console.log(r);
-    console.log(q);
     axios.delete('/delete-Listing?description=' + r + '&email=' + q)
       .then(fetchListing());
   };
