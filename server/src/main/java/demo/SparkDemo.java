@@ -12,6 +12,8 @@ import com.mongodb.client.MongoDatabase;
 //import com.sun.tools.javac.util.List;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.bson.Document;
 
 public class SparkDemo {
@@ -27,12 +29,13 @@ public class SparkDemo {
     MongoDatabase db = mongoClient.getDatabase("Listings"); // Make a mongodb database called Listings
     MongoCollection<Document> listCollection = db.getCollection("ListingCollection");
     // I got this mongo DB set up from our classwork mongo-demo
+    MongoCollection<ListingDto> collection = db.getCollection("ListingCollection", ListingDto.class);
 
+    Gson gson = new Gson();
       port(1235);                                                     // Same port as that in classwork 10
       webSocket("/ws", WebSocketHandler.class);
 
       // Testing mongo database
-
 
       get("/view-Listings", (req, res) -> {
         ArrayList<Document> docs = listCollection.find().into(new ArrayList<Document>());
@@ -47,18 +50,22 @@ public class SparkDemo {
       
           //Plural one is for the whole database. Displays all everything from the database.
 
-      get("/view-Listing", (req, res) -> {             // I made a separate function but maybe I can just update the function above
-        String request = req.body();// so that it gets("/view-Listings/email") and there will be an if statement.
-        ListingDto body = gson.fromJson(request, ListingDto.class);
-        String email = body.email;
-        System.out.println("Email: " + email);
-        ArrayList<Document> docs;
-        if(email.equals("")){
-          docs = listCollection.find().into(new ArrayList<Document>());
-        }
-        else{
-          docs = (ArrayList<Document>) listCollection.find(eq("email", email));
-        }
+      get("/filter", (req, res) -> {             // I made a separate function but maybe I can just update the function above
+        // so that it gets("/view-Listings/email") and there will be an if statement.
+          //List<ListingDto> docDto = collection.find().into(new ArrayList<ListingDto>());
+        ArrayList<Document> docs = listCollection.find().into(new ArrayList<Document>());
+          String email = req.queryMap("email").value();
+          System.out.println("Got in");
+         /* for(int n =  0; n < docDto.size(); n++)
+          {
+            System.out.println(docDto.get(n));
+            if(!(docDto.get(n).email.equals(email))){
+              docDto.remove(n);
+              n--;
+            }
+          }
+*/
+
         return gson.toJson(docs);
       });      // checks the email you're passing in. Front end to past in request body parameter email. Pass back json (of evreything) that has same email aka filtered lists.
 

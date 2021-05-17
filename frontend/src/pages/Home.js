@@ -13,7 +13,7 @@ const Home = () => {
 
 
   const fetchListing = () => {
-    axios.get('/view-Listings')
+    axios.get('/view-Listings?email=')
       .then((res) => {
         setMessageList(res.data);
       });
@@ -38,7 +38,7 @@ const Home = () => {
     console.log(body);
     console.log(filteredList);
 
-    axios.get('/view-Listing', body)
+    axios.get('/filter?email=' + filteredList)
     .then((res) => {
       setMessageList(res.data);
     });

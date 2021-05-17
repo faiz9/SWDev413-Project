@@ -8,8 +8,9 @@ public class ListingDto {
     // Feel free to add amy other fields we may need
     // I modeled this class after classwork 10
 
-    public ListingDto(String description, String email, String id){
-        this.description = description;
+    public ListingDto(String email, String description){
         this.email = email;
+        this.description = description;
+
     }
 }
