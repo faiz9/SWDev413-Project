@@ -25,7 +25,6 @@ const Home = ({ ws }) => {
 
 
   function handleDelete(e, q){
-    
     const r = e;
     console.log(r);
     console.log(q);
@@ -53,8 +52,8 @@ const Home = ({ ws }) => {
           <div>{object.description}</div>
           <button onClick={() => handleDelete(object.description, object.email)} id='delete'>Delete</button>
         </div>)}
-        <input id="filter-input" value={filteredList} onChange={handleFilter} type="email" required>Filter Input</input>
-        <button onClick={filterListings()} id="filter">Filter Listings</button>
+        <input value={filteredList} onChange={handleFilter} />
+        <button onClick={handleFilter}>Filter List</button>
     </div>
   </div>
   );
