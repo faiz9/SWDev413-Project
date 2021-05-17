@@ -50,7 +50,9 @@ const Home = ({ ws }) => {
          {list.map((object, i) => <div key={i}>
           <a href={object.email}>{object.email}</a>
           <div>{object.description}</div>
-          <button onClick={() => handleDelete(object.description, object.email)} id='delete'>Delete</button>
+          <a href="/">
+            <button onClick={() => handleDelete(object.description, object.email)} id='delete'>Delete</button>
+          </a>   
         </div>)}
         <input value={filteredList} onChange={handleFilter} />
         <button onClick={handleFilter}>Filter List</button>
