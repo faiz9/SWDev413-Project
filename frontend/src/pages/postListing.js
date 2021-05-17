@@ -21,8 +21,9 @@ const PostListing = () => {
 			email : input_email,
 			description : input_description,
 		};
-		axios.post('post-listing', body)
-			.then();
+		axios.post('/post-listing', body);
+			setDescription('');
+			setEmail('');
 	};
 return(
 	<div className='postListing'>
