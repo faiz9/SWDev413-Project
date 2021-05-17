@@ -6,9 +6,11 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 
+const ws = new WebSocket('ws://localhost:1235/ws');
+
 ReactDOM.render(
 <BrowserRouter>
-    <App />
+    <App ws={ws} />
 </BrowserRouter>, 
 document.getElementById('root')
 );

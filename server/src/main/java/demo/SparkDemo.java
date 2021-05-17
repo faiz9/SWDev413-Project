@@ -58,22 +58,29 @@ public class SparkDemo {
 
 
       post("/post-listing", (req, res) -> {
-        String email = req.params("email");
-        String desc = req.params("description");
-        Document doc2 = new Document("email", email)
-                .append("description", desc);
-        listCollection.insertOne(doc2);
+        String request = req.body();
+        ListingDto newMessage = gson.fromJson(request, ListingDto.class);
+        System.out.println("newMessage E: " + newMessage.email);
+        System.out.println("newMessage D: " + newMessage.description);
+        if(!(newMessage.email.equals(null)) && !(newMessage.description.equals(null))) {
+          Document doc2 = new Document("email", newMessage.email)
+                  .append("description", newMessage.description);
+          System.out.println("Doc: " + doc2);
+          listCollection.insertOne(doc2);
+        }
         return null;
       });
 
       delete("/delete-Listing", (req, res) -> {
         String request = req.body();
         String  des = req.queryMap("description").value();
+        String email = req.queryMap("email").value();
         System.out.println("req: " + req);
         System.out.println("Body: " + request);
         System.out.println("description: " + des);
         listCollection.deleteOne(eq("description", des));
-        return 0;                                         // I'm returning 0 now but if the front end needs anything returned it can be changed
+        ArrayList<Document> docs = listCollection.find().into(new ArrayList<Document>());
+        return gson.toJson(docs);                                         // I'm returning 0 now but if the front end needs anything returned it can be changed
       });
 
   }

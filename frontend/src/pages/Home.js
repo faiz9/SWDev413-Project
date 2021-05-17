@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 const Home = ({ ws }) => {
+
 const [list, setMessageList] = React.useState([]);
 
 
@@ -9,34 +10,35 @@ const [list, setMessageList] = React.useState([]);
     axios.get('view-Listings')
       .then((res) => {
         setMessageList(res.data);
-      })
-  }
+      });
+  };
+
   React.useEffect(() => {
     fetchListing();
   }, []);
 
 
-  function handleDelete(e){
+  function handleDelete(e, q){
     
     const r = e;
     console.log(r);
-    const body = {
-      description : r,
-    };
-    console.log("body: " + body.description);
-    
-    axios.delete('/delete-Listing?description=' + r)
+    console.log(q);
+    axios.delete('/delete-Listing?description=' + r + '&email=' + q)
       .then(fetchListing());
   };
 
   return (
     <div>
+      <h1>Home</h1>
+    <div>
          {list.map((object, i) => <div key={i}>
-          <div>{object.email}</div>
+          <a href={object.email}>{object.email}</a>
           <div>{object.description}</div>
-          <button onClick={() => handleDelete(object.description)} id='delete'>Delete</button>
+          <button onClick={() => handleDelete(object.description, object.email)} id='delete'>Delete</button>
+          
         </div>)}
     </div>
+  </div>
   );
 };
 
