@@ -38,6 +38,8 @@ class viewListingComponent extends Component {
     this.props.history.push("/post-listing");
   };
 
+  
+
   render() {
     return (
       <div className="container-fluid">
