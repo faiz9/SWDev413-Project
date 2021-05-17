@@ -32,6 +32,7 @@ return(
 		</div>
 	</div>
 );
+//added the placeholders to make sure which one is email and description for post listings
 };
 
 export default PostListing;
