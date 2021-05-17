@@ -12,8 +12,8 @@ const App = ({ ws }) => {
     
     <div>
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/postListing">Post</Link>
+        <Link to="/">Home </Link>
+        <Link to="/postListing"> Post </Link>
       </nav>
       <Switch>
         <Route path="/postListing">
