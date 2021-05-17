@@ -30,15 +30,19 @@ const Home = () => {
       .then(fetchListing());
   };
 
-  function filterListings(email){
+  const filterListings = () => {
     const body = {
 			email: filteredList
 			//description : input_description,
 		};
-    axios.get('view-Listing')
+    console.log(body);
+    console.log(filteredList);
+
+    axios.get('/view-Listing', body)
     .then((res) => {
       setMessageList(res.data);
     });
+    setFilteredList('');
   };
 
   return (
@@ -50,8 +54,8 @@ const Home = () => {
           <div>{object.description}</div>
           <button onClick={() => handleDelete(object.description, object.email)} id='delete'>Delete</button>
         </div>)}
-        <input id="filter-input" value={filteredList} onChange={handleFilter} type="email" required>Filter Input</input>
-        <button onClick={filterListings()} id="filter">Filter Listings</button>
+        <input id="filter-input" value={filteredList} onChange={handleFilter} />
+        <button onClick={filterListings} id="filter">Filter Listings</button>
     </div>
   </div>
   );
