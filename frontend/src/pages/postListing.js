@@ -1,8 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-
-
 const PostListing = () => {
 	const[input_description, setDescription] = React.useState('');
 	const[input_email, setEmail] = React.useState('');
@@ -26,10 +24,10 @@ const PostListing = () => {
 	};
 return(
 	<div className='postListing'>
-		<h1>Post</h1>
+		<h1>Post Listing </h1>
 		<div className='create-listing'>
-			<input value= {input_email} onChange={handleEmailUpdate} id="input-email" />
-			<input value= {input_description} onChange={handleDescriptionUpdate} id="input-description" />
+			<input value= {input_email} onChange={handleEmailUpdate} id="input-email" placeholder="Enter Email"/>
+			<input value= {input_description} onChange={handleDescriptionUpdate} id="input-description" placeholder="Enter Description" /> <br></br>
 			<button onClick={handleSubmit} id="submit">Submit</button>
 		</div>
 	</div>
