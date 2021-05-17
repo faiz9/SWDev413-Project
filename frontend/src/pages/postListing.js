@@ -1,8 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-
-
 const PostListing = () => {
 	const[input_description, setDescription] = React.useState('');
 	const[input_email, setEmail] = React.useState('');
@@ -27,14 +25,17 @@ const PostListing = () => {
 	};
 return(
 	<div className='postListing'>
-		<h1>Post</h1>
+		<h1>Post Listing </h1>
 		<div className='create-listing'>
-			<input value= {input_email} type="email" onChange={handleEmailUpdate} id="input-email" required />
-			<input value= {input_description} onChange={handleDescriptionUpdate} id="input-description" required />
-			<button onClick={handleSubmit} id="submit">Submit</button>
+			<input value= {input_email} onChange={handleEmailUpdate} id="input-email" placeholder="Enter Email"/>
+			<input value= {input_description} onChange={handleDescriptionUpdate} id="input-description" placeholder="Enter Description" /> <br></br>
+			<a href="/">
+				<button onClick={handleSubmit} id="submit">Submit</button>
+			</a>
 		</div>
 	</div>
 );
+//added the placeholders to make sure which one is email and description for post listings
 };
 
 export default PostListing;

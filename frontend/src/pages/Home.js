@@ -49,13 +49,16 @@ const Home = () => {
     <div>
       <h1>Home</h1>
     <div>
+        <input value={filteredList} onChange={handleFilter} />
+        <button onClick={filterListings} id="filter">Filter Listings</button>
          {list.map((object, i) => <div key={i}>
           <a href={object.email}>{object.email}</a>
           <div>{object.description}</div>
-          <button onClick={() => handleDelete(object.description, object.email)} id='delete'>Delete</button>
+          <a href="/">
+            <button onClick={() => handleDelete(object.description, object.email)} id='delete'>Delete</button>
+          </a>   
         </div>)}
-        <input id="filter-input" value={filteredList} onChange={handleFilter} />
-        <button onClick={filterListings} id="filter">Filter Listings</button>
+
     </div>
   </div>
   );
