@@ -13,7 +13,6 @@ import com.mongodb.client.MongoDatabase;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.bson.Document;
 
 public class SparkDemo {
@@ -30,6 +29,8 @@ public class SparkDemo {
     MongoCollection<Document> listCollection = db.getCollection("ListingCollection");
     // I got this mongo DB set up from our classwork mongo-demo
     MongoCollection<ListingDto> collection = db.getCollection("ListingCollection", ListingDto.class);
+
+    //List<ListingDto> temp = collection.find(new Document(), ListingDto.class).into(new ArrayList<ListingDto>());
 
     Gson gson = new Gson();
       port(1235);                                                     // Same port as that in classwork 10
@@ -51,20 +52,21 @@ public class SparkDemo {
           //Plural one is for the whole database. Displays all everything from the database.
 
       get("/filter", (req, res) -> {             // I made a separate function but maybe I can just update the function above
-        // so that it gets("/view-Listings/email") and there will be an if statement.
-          //List<ListingDto> docDto = collection.find().into(new ArrayList<ListingDto>());
+
         ArrayList<Document> docs = listCollection.find().into(new ArrayList<Document>());
           String email = req.queryMap("email").value();
-          System.out.println("Got in");
-         /* for(int n =  0; n < docDto.size(); n++)
+
+         for(int n =  0; n < docs.size(); n++)
           {
-            System.out.println(docDto.get(n));
-            if(!(docDto.get(n).email.equals(email))){
-              docDto.remove(n);
-              n--;
+            String temp = gson.toJson(docs.get(n));
+            System.out.println(docs.get(n));
+            System.out.println(temp);
+            if(!(temp.contains(email))){
+              docs.remove(n);
+              n = n-1;
             }
+
           }
-*/
 
         return gson.toJson(docs);
       });      // checks the email you're passing in. Front end to past in request body parameter email. Pass back json (of evreything) that has same email aka filtered lists.
