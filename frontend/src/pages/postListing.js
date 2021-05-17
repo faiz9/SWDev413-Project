@@ -28,8 +28,8 @@ return(
 	<div className='postListing'>
 		<h1>Post</h1>
 		<div className='create-listing'>
-			<input value= {input_email} onChange={handleEmailUpdate} id="input-email" />
-			<input value= {input_description} onChange={handleDescriptionUpdate} id="input-description" />
+			<input value= {input_email} type="email" onChange={handleEmailUpdate} id="input-email" required />
+			<input value= {input_description} onChange={handleDescriptionUpdate} id="input-description" required />
 			<button onClick={handleSubmit} id="submit">Submit</button>
 		</div>
 	</div>

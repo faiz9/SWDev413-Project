@@ -30,6 +30,7 @@ const [list, setMessageList] = React.useState([]);
   return (
     <div>
       <h1>Home</h1>
+
     <div>
          {list.map((object, i) => <div key={i}>
           <a href={object.email}>{object.email}</a>

@@ -48,9 +48,9 @@ public class SparkDemo {
           //Plural one is for the whole database. Displays all everything from the database.
 
       get("/view-Listing", (req, res) -> {             // I made a separate function but maybe I can just update the function above
-        String request = req.body();                        // so that it gets("/view-Listings/email") and there will be an if statement.
-        String email = req.params("email");
-        System.out.println("Request: " + request);
+        String request = req.body();// so that it gets("/view-Listings/email") and there will be an if statement.
+        ListingDto body = gson.fromJson(request, ListingDto.class);
+        String email = body.email;
         System.out.println("Email: " + email);
         ArrayList<Document> docs = (ArrayList<Document>) listCollection.find(eq("email", email));
         return gson.toJson(docs);
@@ -62,7 +62,7 @@ public class SparkDemo {
         ListingDto newMessage = gson.fromJson(request, ListingDto.class);
         System.out.println("newMessage E: " + newMessage.email);
         System.out.println("newMessage D: " + newMessage.description);
-        if(!(newMessage.email.equals(null)) && !(newMessage.description.equals(null))) {
+        if(!(newMessage.email.equals("")) && !(newMessage.description.equals(""))) {
           Document doc2 = new Document("email", newMessage.email)
                   .append("description", newMessage.description);
           System.out.println("Doc: " + doc2);
