@@ -28,7 +28,9 @@ return(
 		<div className='create-listing'>
 			<input value= {input_email} onChange={handleEmailUpdate} id="input-email" placeholder="Enter Email"/>
 			<input value= {input_description} onChange={handleDescriptionUpdate} id="input-description" placeholder="Enter Description" /> <br></br>
-			<button onClick={handleSubmit} id="submit">Submit</button>
+			<a href="/">
+				<button onClick={handleSubmit} id="submit">Submit</button>
+			</a>
 		</div>
 	</div>
 );
